@@ -165,3 +165,106 @@ myComputer.getMake();  // "Asus"
 DualMonitorComputer myDualMonitorComputer new DualMonitoryComputer(17, 2, "Asus", "Zenbook", "Ubuntu 16.04", 2);
 myDualMonitorComputer.getOperatingSystem();  // "Ubuntu 16.04"
 ```
+
+## Composition vs Inheritance
+Composition is creating a class as a member, or a property/field, inside of another class. For example, a room can contain furniture but the room is not the furniture itself. The room will have paint on the walls, but the room is not the paint. The benefits of using composition over inheritance is
+
+**Flexibility**: Java does not support multi-class inheritance which means we can only inherit from a single class. With composition we are not stuck with trying to decide whether our class is specifically one thing but instead it is made up of multiple things or classes.
+
+**Specificity**: What I mean by specificity is that when creating classes as a property we can then become more specific as to what each property contains. In our Room example, the Room can contain a nightstand of class `Furniture`. With composition we can then instantiate this `Furniture NightStand` class and using the constructor function for the `NightStand` we can specify things like the number of legs, color, or material it is made of.
+
+```java
+// Furniture class
+class Furniture {
+  int legs;
+  String color;
+  String material;
+
+  public Furniture(int legs, String color, String material) {
+    this.legs = legs;
+    this.color = color;
+    this.material = material;
+  }
+}
+
+// Room class
+class Room {
+  Furniture nightStand;
+
+  public Room(Furniture nightStand) {
+    this.nightStand = nightStand;
+  }
+}
+```
+
+If we wanted, we could get even more specific by creating a `PaintColor` class and giving it properties like `String brand`, `String color`, `boolean hasLead` and so on.
+
+## Encapsulation
+Encasulation in a nutshell is restricting properties and fields from outside use from within a class. Let's take a look at an example where we are NOT using encapsulation.
+
+```java
+class Hero {
+  String name;
+  int health;
+}
+```
+
+In our `Hero` class we aren't specifying whether or not the properties on the class are public, protected, or private, also known as scope, so by default Java will make these properties public or available for anyone to use.
+
+```java
+Hero ragnar = new Hero();
+ragnar.name = "Ragnar";
+ragnar.health = 100;
+```
+
+We are able to manipulate the values of our `Hero` class instance and there are no constrains to the values passed in, other than the data types. What if our hero were to lose all his health? The player could easily access the hero's health property and change it back to 100 or even 1000. Now let's take a look at how to properly use encapsulation.
+
+```java
+class Hero {
+  private String name;
+  private int health;
+
+  public Hero(String name, int health) {
+    this.name = name;
+    this.health = health;
+  }
+
+  public getHealth() {
+    return this.health;
+  }
+
+  public getName() {
+    return this.name;
+  }
+}
+```
+
+By specifying that the properties on our `Hero` class are `private` scope we are restricting access to the `name` and `health` property to only inside the `Hero` class. This way, players can only view the name and health of a particular hero but they are not able to change them.
+
+#Polymorphism
+Polymorphism isn't as magical as it sounds and is actually quite simple. Polymorphism changes the way a method behaves depending on the object it is being called from.
+
+```java
+class Character {
+  public String greeting() {
+    return "I am just an NPC";
+  }
+}
+
+class PlayableCharacter extends Character {
+  @Override  // not required but good to let others know this method isn't original to the current class
+  public String greeting() {
+    return "I am a Playable Character";
+  }
+}
+
+class NonPlayableCharacter extends Character {
+  // we are not overriding the greeting() method from Character
+}
+
+PlayableCharacter myPC = new PlayableCharacter();
+myPC.greeting()  // "I am a Playable Character"
+
+NonPlayableCharacter myNPC = new MyPlayableCharacter();
+myNPC.greeting()  // "I am just an NPC"
+```
