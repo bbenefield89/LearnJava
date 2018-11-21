@@ -1,4 +1,4 @@
-# Arrays & ArrayLists
+# Arrays, ArrayLists & LinkedLists
 
 ## Arrays
 Arrays in Java are a set amount of similar data types stored in a row in memory. Arrays are great when you know exactly how many elements you have and that they will all be of the same data type.
@@ -105,4 +105,39 @@ System.out.println(Arrays.toString(myNumbers.toArray()));  // [ 2, 3 ]
 // explicitly removing the value that is object two
 myNumbers.remove(two);
 System.out.println(Arrays.toString(myNumbers.toArray()));  // [ 3 ]
+```
+
+## LinkedLists
+Much like an array list, a linked list is a special data type that can hold a list of values in a "ascending" order. I put ascending in quotes because while it appears each element is held in ascending order, 0, 1, 2, ...n, the elements are actually being held in different places in memory. A very simplistic example of this would be if we had 10bits of memory and we wanted to store two boolean values in a linked list, it's very possible one could be stored at memory-index 0, and another stored at memory-index 5. Arrays on the other hand will store each value next to each other in memory. So an array would be at memory-index 0, and memory-index 1.
+
+### Comparing LinkedLists and Arrays
+What this means is that we can no longer access our values with a normal iterator value, `int i = 0;`, like we can with an Array and ArrayLists. Instead, we need to use a special `ListIterator` type that contains some methods for getting the next and previous values of our LinkedList. Just to clear up any confusion, finding an element in a LinkedList will **always** be of `O(n)` time complexity. What this also means, is unless you are adding or removing elements from the **Head** or **Tail** of a LinkedList, first and last element respectively, this will also be of linear time complexity.
+
+With so much bad, how could this data structure possibly be useful? Let's take a look back at an Array. Because Arrays need to be held in ascending order, and because each element is nicely seated next to each other in memory, what happens when we want to alter our Array? If we were using an Array at full capacity and we wanted to add to it, we would not only need to copy over all the elements into a new array, but now that new array has to go and find some open space in memory to fit all of the elements in order. If we wanted to remove the zeroth index in this array, the computer would then need to shift **all** the elements in the array to the left so that the array can stay in order. What if we wanted to push a new element in the middle of the Array? Now we want to add a new element to the beginning? All elements need to be shifted to the right in order to make room.
+
+### Comparing LinkedLists to ArrayLists
+ArrayLists work much in the same way as an Array. The difference is we don't need to assign any specific amount of space as Java does this for us. So while Java has taken it upon itself to remove this level of complexity from the developer, what do you think is still happening under the hood? Data needs space to live, and Java is going to find that space.
+
+### Creating a LinkedList
+To create a LinkedList we must first import the `LinkedList` object from `java.util`. Afterwards, just like an ArrayList we need to specify a type that will live in the LinkedList and instantiate it.
+
+```java
+import java.util.LinkedList;
+
+class MyLinkedList {
+  LinkedList<String> strings = new LinkedList<String>();
+}
+```
+
+### Adding to a LinkedList
+We can add to a LinkedList in constant time because the LinkedList object holds a pointer reference to its tail. Using the `.add(E e)` method will simply move our new String to the end, update the objects `tail` reference, and update the old tails `.next()` reference to the new tail. We can also add to the `head` of a LinkedList using the `.offerFirst(E e)` method. Both cases, `e` is just the element you want to add.
+
+```java
+System.out.println(strings.toString());  // []
+
+strings.add("World!");
+System.out.println(strings.toString());  // [World!]
+
+strings.offerFirst("Hello");
+System.out.println(strings.toString());  // [Hello, World!]
 ```
