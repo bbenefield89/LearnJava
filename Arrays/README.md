@@ -141,3 +141,5 @@ System.out.println(strings.toString());  // [World!]
 strings.offerFirst("Hello");
 System.out.println(strings.toString());  // [Hello, World!]
 ```
+
+### Removing from a LinkedList
