@@ -143,3 +143,40 @@ System.out.println(strings.toString());  // [Hello, World!]
 ```
 
 ### Removing from a LinkedList
+Removing from a LinkedList can also be done in either contant or linear time. Like we learned earlier, LinkedLists keep a reference to their **Head** and **Tail** at all times. Calling the appropriate methods, `.removeFirst()` and `removeLast()`, we can achieve constant time in our applications while removing these elements.
+
+What happens though, if we need to remove elements from somewhere other than the Head or Tail of our LinkedLists? Unfortunately, in order to do this we can only remove these elements in linear time using the `.remove()` method where we can pass in either the "index" of the element we want to remove, or pass in the actual Object that is in the LinkedList.
+
+```java
+import java.util.LinkedList;
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> myInts = new LinkedList<>();
+        Integer four = Integer.valueOf(4);
+
+        myInts.add(1);
+        myInts.add(2);
+        myInts.add(3);
+        myInts.add(four);
+        myInts.add(5);
+        System.out.println(myInts.toString());  // [1, 2, 3, 4, 5]
+
+        // removing the tail (last element)
+        myInts.removeLast();
+        System.out.println(myInts.toString());  // [1, 2, 3, 4]
+
+        // removing the head (first element)
+        myInts.removeFirst();
+        System.out.println(myInts.toString());  // [2, 3, 4]
+
+        // passing an "index" to be removed
+        myInts.remove(1);
+        System.out.println(myInts.toString());  // [2, 4]
+
+        // passing in the actual Object we created earlier, "four"
+        myInts.remove(four);
+        System.out.println(myInts.toString());  // [2]
+    }
+}
+```
