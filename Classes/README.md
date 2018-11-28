@@ -268,3 +268,8 @@ myPC.greeting()  // "I am a Playable Character"
 NonPlayableCharacter myNPC = new MyPlayableCharacter();
 myNPC.greeting()  // "I am just an NPC"
 ```
+
+# Java Classes Pt. 2
+
+## Interfaces
+Interfaces are like classes that have no logic inside of them. Atleast, this was true up until Java-8. Since Java-8 we can now write `default` and `static` methods in our interfaces that contain logic.
