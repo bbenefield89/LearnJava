@@ -1,7 +1,7 @@
 # Arrays, ArrayLists & LinkedLists
 
 ## Arrays
-Arrays in Java are a set amount of similar data types stored in a row in memory. Arrays are great when you know exactly how many elements you have and that they will all be of the same data type.
+Arrays in Java are a list of data stored in your computers memory in sequential order. Arrays are great when you know exactly how many elements you have and that they will all be of the same data type.
 
 ### Creating Arrays
 There are several ways to create an array in Java. One similarity to each solution is that arrays always start with the data type that it will contain and followed with two square brackets e.g. `int[]`.
